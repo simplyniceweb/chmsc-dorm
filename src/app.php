@@ -1,8 +1,14 @@
 <?php
 
+use Doctrine\ORM\Tools\Setup;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Configuration;
+
 use Silex\Application;
 use Silex\Provider\AssetServiceProvider;
 use Silex\Provider\TwigServiceProvider;
+use Silex\Provider\MonologServiceProvider;
+use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\HttpFragmentServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
@@ -11,13 +17,12 @@ use Silex\Provider\RoutingServiceProvider;
 use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\FormServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
-use Rpodwika\Silex\YamlConfigServiceProvider;
 use Silex\Provider\DoctrineServiceProvider;
+use Symfony\Component\Form\FormRenderer;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmExtension;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
-use Doctrine\ORM\Tools\Setup;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Configuration;
+
+use Rpodwika\Silex\YamlConfigServiceProvider;
 
 define("APP_ROOT", __DIR__ . "/");
 define('CONF_FILES', __DIR__ . "/../config/");
@@ -38,6 +43,28 @@ $app->register(new ValidatorServiceProvider());
 $app->register(new YamlConfigServiceProvider(CONF_FILES . "settings.yml"));
 $app->register(new YamlConfigServiceProvider(CONF_FILES . "database.yml"));
 
+// Forms
+$app['form.extensions'] = $app->extend('form.extensions', function ($extensions) use ($app) {
+    $managerRegistry = new forms\ManagerRegistry(null, array(), array('orm.em'), null, null, '\Doctrine\ORM\Proxy\Proxy');
+    $managerRegistry->setContainer($app);
+    $extensions[] = new DoctrineOrmExtension($managerRegistry);
+    $extensions[] = new forms\TypesExtension($app);
+
+    return $extensions;
+});
+
+$app['form.type.extensions'] = $app->extend('form.type.extensions', function ($extensions) use ($app) {
+    $extensions[] = new forms\extensions\FileTypeExtension($app);
+    return $extensions;
+});
+
+$app['twig.runtimes'] = $app->extend('twig.runtimes', function ($runtimes, $app) {
+    return array_merge($runtimes, [
+        FormRenderer::class => 'twig.form.renderer',
+    ]);
+});
+
+// Database
 $cache = new \Doctrine\Common\Cache\ArrayCache;
 $app->register(new DoctrineServiceProvider(), ['db.options' => $app['config']['database']]);
 
@@ -56,9 +83,21 @@ $app['orm.em'] = EntityManager::create($app['db'], $dbConfig);
 $app['session.storage.handler'] = null;
 
 $app['twig'] = $app->extend('twig', function ($twig, $app) {
-    // add custom globals, filters, tags, ...
+    $twig->addExtension(new Twig_Extensions_Extension_Text());
 
     return $twig;
+});
+
+// Translation
+$app->register(new TranslationServiceProvider(), [
+    "locale_fallback" => ['en']
+]);
+
+$app["translator"] = $app->extend("translator", function($translator, $app) {
+    $translator->addLoader("yaml", new YamlFileLoader());
+    $translator->addResource("yaml", CONF_FILES . "ph.yml", 'ph');
+
+    return $translator;
 });
 
 // security

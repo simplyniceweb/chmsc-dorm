@@ -19,6 +19,21 @@
 	    <div class="content">
 	        <div class="container-fluid">
 	            <div class="row">
+						{{ form_start(form) }}
+							<div class="col-md-6">
+								{{ form_row(form.student_id) }}
+								{{ form_row(form.first_name) }}
+								{{ form_row(form.middle_name) }}
+								{{ form_row(form.last_name) }}
+							</div>
+							<div class="col-md-6">
+								{{ form_row(form.email) }}
+								{{ form_row(form.phone) }}
+								{{ form_row(form.address) }}
+								{{ form_row(form.save) }}
+							</div>
+						{{ form_end(form) }}
+					</div>
 	            </div>
 	        </div>
 	    </div>

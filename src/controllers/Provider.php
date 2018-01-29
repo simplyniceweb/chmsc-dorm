@@ -15,7 +15,17 @@ class Provider implements ControllerProviderInterface
         $route->match('/', "controllers\\Provider::index")->bind('homepage');
         $route->match('/login', "controllers\\Provider::login")->bind('login');
 
+        $this->createRoutes($route, 'students', 'Student');
+
         return $route;
+    }
+
+    function createRoutes($route, $link, $controller)
+    {
+        $route->match("/$link", "controllers\\$controller::index")->bind($link);
+        $route->match("/$link/create", "controllers\\$controller::form")->bind("$link.create");
+        $route->match("/$link/update/{id}", "controllers\\$controller::form")->bind("$link.update");
+        $route->match("/$link/delete/{id}", "controllers\\$controller::delete")->bind("$link.delete");
     }
 
     public function index(Application $app, Request $request, $slug = null)
