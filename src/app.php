@@ -35,6 +35,7 @@ $app->register(new LocaleServiceProvider());
 // Forms
 $app->register(new FormServiceProvider());
 $app->register(new ValidatorServiceProvider());
+$app->register(new YamlConfigServiceProvider(CONF_FILES . "settings.yml"));
 $app->register(new YamlConfigServiceProvider(CONF_FILES . "database.yml"));
 
 $cache = new \Doctrine\Common\Cache\ArrayCache;

@@ -1,3 +1,6 @@
 .login-form {
 	margin-top: 80px;
 }
+.sidebar-wrapper .logo a {
+	font-weight: 700 !important;
+}

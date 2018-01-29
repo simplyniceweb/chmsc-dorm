@@ -1,38 +1,44 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
-	<div class="login-form col-md-4 col-md-offset-4">
-		<h2>Login</h2>
-		<hr>
-        {% if error %}
-            <br />
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                {{ 'Invalid username/password' }}
-            </div>        
-        {% endif %}
-        <form id="login" action="{{ path('login_check') }}" method="POST">
-            <div class="form-group">
-                <div class="input-group">
-					<span class="input-group-btn">
-						<button class="btn btn-info" type="button"><i class="fa fa-fw fa-user"></i></button>
-					</span>
-                    <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="{{ "Username" }}" class="form-control" autofocus />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="input-group">
-					<span class="input-group-btn">
-						<button class="btn btn-info" type="button"><i class="fa fa-fw fa-lock"></i></button>
-					</span>
-                    <input type="password" id="password" name="_password" placeholder="{{ "Password" }}" value="" class="form-control" />
-                </div>
-            </div>
-            <div class="row">
-               <div class="col-md-12">
-                    <button type="submit" class="btn btn-block btn-outline-success">Login</button>
-               </div>
-            </div>
-        </form>
-	</div>
+
+    <div class="container">
+        <div class="row">
+        	<div class="login-form col-md-4 col-md-offset-4">
+        		<h2>Login</h2>
+        		<hr>
+                {% if error %}
+                    <br />
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        Invalid username/password
+                    </div>        
+                {% endif %}
+                <form id="login" action="{{ path('login_check') }}" method="POST">
+                    <div class="form-group">
+                        <div class="input-group">
+        					<span class="input-group-btn">
+        						<button class="btn btn-info" type="button"><i class="fa fa-fw fa-user"></i></button>
+        					</span>
+                            <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Username" class="form-control" autofocus />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+        					<span class="input-group-btn">
+        						<button class="btn btn-info" type="button"><i class="fa fa-fw fa-lock"></i></button>
+        					</span>
+                            <input type="password" id="password" name="_password" placeholder="Password" value="" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                       <div class="col-md-12">
+                            <button type="submit" class="btn btn-block btn-outline-success"><b>LOGIN</b></button>
+                       </div>
+                    </div>
+                </form>
+        	</div>
+        </div>
+    </div>
+
 {% endblock %}

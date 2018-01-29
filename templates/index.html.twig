@@ -1,5 +1,36 @@
 {% extends "layout.html.twig" %}
 
+{% block library_stylesheets %}
+    <link href='//fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="{{ asset('assets/css/paper-dashboard.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/themify-icons.css') }}">
+{% endblock library_stylesheets %}
+
 {% block content %}
-    Welcome to your new Silex Application!
-{% endblock %}
+
+<div class="wrapper">
+
+	{% include 'sidebar.twig' %}
+
+	<div class="main-panel">
+
+		{% include 'navbar.twig' %}
+
+	    <div class="content">
+	        <div class="container-fluid">
+	            <div class="row">
+	            </div>
+	        </div>
+	    </div>
+
+		{% include 'footer.twig' %}
+
+	</div>
+
+</div>
+
+{% endblock content %}
+
+{% block library_scripts %}
+	<script src="{{ asset('assets/js/paper-dashboard.js') }}"></script>
+{% endblock library_scripts %}

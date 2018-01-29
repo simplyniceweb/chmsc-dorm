@@ -4,9 +4,10 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CHMSC Dorm - {{ title }}</title>
+<title>{{ app.config.project_title }} - {{ title }}</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% block library_stylesheets %}{% endblock library_stylesheets %}
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -15,12 +16,10 @@
 </head>
 <body>
 
-	<div class="container">
-		<div class="row">
-			{% block content %}{% endblock %}
-		</div>
-	</div>
+    {% block content %}{% endblock %}
 
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	{% block library_scripts %}{% endblock library_scripts %}
 </body>
 </html>
