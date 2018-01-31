@@ -33,13 +33,13 @@
 						<tbody>
 						{% for d in data %}
 							<tr>
-								<td>{{ d.getStudentId }}</td>
-								<td>{{ d.getFirstName }}</td>
-								<td>{{ d.getLastName }}</td>
+								<td>{{ d.student_id }}</td>
+								<td>{{ d.first_name }}</td>
+								<td>{{ d.last_name }}</td>
 								<td>
 									<div class="btn-group" role="group" aria-label="...">
-										<a href="#" class="btn btn-default">Edit</a>
-										<a href="#" class="btn btn-default">Delete</a>
+										<a href="{{ path('students.update', {id: d.id}) }}" class="btn btn-default">Edit</a>
+										<a href="{{ path('students.delete', {id: d.id}) }}" class="btn btn-default">Delete</a>
 									</div>
 								</td>
 							</tr>

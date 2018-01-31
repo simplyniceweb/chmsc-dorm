@@ -13,22 +13,22 @@ class Student
     /** @Column(type="string") **/
     public $student_id;
     
-    /** @Column(type="string") **/
+    /** @Column(type="string", nullable=true) **/
     public $first_name;
     
-    /** @Column(type="string") **/
+    /** @Column(type="string", nullable=true) **/
     public $middle_name;
     
-    /** @Column(type="string") **/
+    /** @Column(type="string", nullable=true) **/
     public $last_name;
     
-    /** @Column(type="string") **/
+    /** @Column(type="string", nullable=true) **/
     public $phone;
     
-    /** @Column(type="string") **/
+    /** @Column(type="string", nullable=true) **/
     public $email;
     
-    /** @Column(type="text") **/
+    /** @Column(type="text", nullable=true) **/
     public $address;
     
     /** @Column(type="integer", nullable=true) **/

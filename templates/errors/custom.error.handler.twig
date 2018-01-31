@@ -1,0 +1,10 @@
+<div class="alert alert-{{ class }} alert-dismissible alert-global" role="alert">
+    <span class="close" data-dismiss="alert" aria-label="Close">
+        <small><i class="fa fa-fw fa-times"></i></small>
+    </span>
+    {% for msg in messages %}
+        <ul>
+            <li>{{ msg|trans|raw }}</li>
+        </ul>
+    {% endfor %}
+</div>

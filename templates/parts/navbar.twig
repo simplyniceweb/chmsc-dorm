@@ -59,11 +59,11 @@
 <div class="container-fluid">
     <div class="row admin-error-handler">
         {% if success %}
-            {% include "error.handler.twig" with {messages: success, class: 'success'} %}
+            {% include "errors/custom.error.handler.twig" with {messages: success, class: 'success'} %}
         {% endif %}
 
         {% if errors %}
-            {% include "error.handler.twig" with {messages: errors, class: 'danger'} %}
+            {% include "errors/custom.error.handler.twig" with {messages: errors, class: 'danger'} %}
         {% endif %}
     </div>
 </div>

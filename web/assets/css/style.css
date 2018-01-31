@@ -1,3 +1,9 @@
+/** CUSTOM CSS **/
+.admin-error-handler .alert-dismissable .close, 
+.admin-error-handler .alert-dismissible .close {
+	right: 0 !important;
+}
+
 .login-form {
 	margin-top: 80px;
 }
